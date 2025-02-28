@@ -34,11 +34,9 @@ An interactive and user-friendly unit converter built with **Streamlit** that su
    ```
 
 ## 📸 Screenshots
-### Light Mode 🌞
-![Light Mode Screenshot](./screenshots/light_mode.png)
 
 ### Dark Mode 🌙
-![Dark Mode Screenshot](./screenshots/dark_mode.png)
+![Dark Mode Screenshot](https://github.com/mohsin-ali08/Python-projects/blob/main/Unit-Converter/ui-screenshot/ui-screenshot.png)
 
 ## 🤝 Contribution
 Contributions are welcome! To contribute:

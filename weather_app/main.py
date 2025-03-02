@@ -19,51 +19,64 @@ def main():
     bg_image_path = "assets/bg_img.jpg"
     bg_image_base64 = f"data:image/jpg;base64,{get_base64_image(bg_image_path)}"
 
-    # Hero Section with Background Image
+    # Custom CSS for Stylish UI
     st.markdown(
         f"""
         <style>
-        .hero {{
-            text-align: center;
-            font-size: 36px;
-            font-weight: bold;
-            margin-top: 20px;
-            color: white;
-            background: url("{bg_image_base64}");
-            background-size: cover;
-            padding: 80px;
-            border-radius: 12px;
-            box-shadow: 0px 6px 15px rgba(0,0,0,0.4);
-        }}
-        .search-container {{
-            display: flex;
-            justify-content: center;
-            margin-top: 30px;
-        }}
-        .search-bar {{
-            width: 50%;
+        .search-box {{
             padding: 12px;
             font-size: 18px;
             border-radius: 8px;
-            border: 1px solid #ccc;
+            border: none;
+            width: 50%;
             box-shadow: inset 0px 4px 8px rgba(0,0,0,0.1);
         }}
+        .btn {{
+            margin-top: 10px;
+            padding: 12px 24px;
+            font-size: 18px;
+            color: white;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }}
+        .btn:hover {{
+            background: linear-gradient(135deg, #a777e3, #6e8efb);
+        }}
+        .weather-card {{
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0px 6px 15px rgba(0,0,0,0.4);
+            color: white;
+        }}
         </style>
-        <div class='hero'>🌤️ Weather App</div>
         """,
         unsafe_allow_html=True
     )
 
-    # Search Bar
-    city = st.text_input("Enter city name", "Lahore", help="Type the name of the city")
-
-    if st.button("Get Weather"):
+    # Weather App Interface
+    st.title("🌤️ Weather App")
+    city = st.text_input("Enter city name", "Lahore", key="city_input")
+    if st.button("Get Weather", key="weather_btn"):
         weather_data = get_weather(city)
         if weather_data:
-            st.subheader(f"Weather in {city}")
-            st.write(f"**Temperature:** {weather_data['temp']}°C")
-            st.write(f"**Condition:** {weather_data['description']}")
-            st.image(weather_data['icon'], caption=weather_data['description'])
+            st.markdown(
+                f"""
+                <div class='weather-card'>
+                    <h2>Weather in {city}</h2>
+                    <p><strong>Temperature:</strong> {weather_data['temp']}°C</p>
+                    <p><strong>Condition:</strong> {weather_data['description']}</p>
+                    <img src='{weather_data['icon']}' alt='weather icon'>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
         else:
             st.error("City not found!")
 
